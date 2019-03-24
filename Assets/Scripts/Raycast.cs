@@ -25,7 +25,7 @@ public class Raycast : MonoBehaviour
 				interactText.text = "Press E to interact";
 				if (Input.GetKeyDown("e"))
 				{
-					raycastObj.GetComponent<ShoeTable>().Interact();
+					raycastObj.GetComponent<Interaction>().Interact();
 				}
 			}
 		}

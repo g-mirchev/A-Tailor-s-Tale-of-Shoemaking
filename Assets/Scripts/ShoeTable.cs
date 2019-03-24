@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShoeTable : MonoBehaviour
+public class ShoeTable : Interaction
 {
 	public MovementLocker movementLocker;
 	public Animator animator;
 	
-    public void Interact()
+    public override void Interact()
 	{
 		OpenWorkingTable();
 	}
