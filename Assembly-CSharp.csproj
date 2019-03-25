@@ -55,17 +55,25 @@
   <ItemGroup>
      <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
      <Compile Include="Assets\RunemarkStudio\DarkFantasyKit [Free]\Readme\Parts\Readme.cs" />
+     <Compile Include="Assets\Scripts\Boots.cs" />
      <Compile Include="Assets\Scripts\CamMouseLook.cs" />
      <Compile Include="Assets\Scripts\ChoiceManager.cs" />
+     <Compile Include="Assets\Scripts\Cloths.cs" />
+     <Compile Include="Assets\Scripts\Craftable.cs" />
      <Compile Include="Assets\Scripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\Interaction.cs" />
+     <Compile Include="Assets\Scripts\Inventory.cs" />
+     <Compile Include="Assets\Scripts\Item.cs" />
+     <Compile Include="Assets\Scripts\Leather.cs" />
      <Compile Include="Assets\Scripts\MovementLocker.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Raycast.cs" />
      <Compile Include="Assets\Scripts\ShoeTable.cs" />
      <Compile Include="Assets\Scripts\Sleep.cs" />
+     <Compile Include="Assets\Scripts\Sneakers.cs" />
+     <Compile Include="Assets\Scripts\Timeline.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\Fonts\Documentation\JazzCreateBubble_VersionHistory_1.1.txt" />

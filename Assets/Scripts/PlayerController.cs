@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour		// integrated from this video https://www.youtube.com/watch?v=blO039OzUZc
 {
 	public float speed = 10.0F;
-    // Start is called before the first frame update
+    // Lock the cursor upon start
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
+    // moving frint and back uses translation while sideways uses strafle for a more realistic feeling
     void Update()
     {
         float translation = Input.GetAxis("Vertical") * speed;

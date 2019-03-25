@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Dialogue
+public class Dialogue            // https://www.youtube.com/watch?v=_nRzoTzeyxU
 {
     public string name;
 	

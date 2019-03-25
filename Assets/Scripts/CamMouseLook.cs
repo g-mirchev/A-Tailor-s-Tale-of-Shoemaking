@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamMouseLook : MonoBehaviour
+public class CamMouseLook : MonoBehaviour		// I got this from here https://www.youtube.com/watch?v=blO039OzUZc
 {
+	
 	Vector2 mouseLook;
 	Vector2 smoothV;
 	public float sensitivity = 5.0f;
@@ -11,13 +12,13 @@ public class CamMouseLook : MonoBehaviour
 	
 	GameObject character;
 	
-    // Start is called before the first frame update
+    // In this case the camera is a child of the player
     void Start()
     {
         character = this.transform.parent.gameObject;
     }
 
-    // Update is called once per frame
+    // This makes the camera follow the mouse movements on the X and Y acis looking from the player's perspective, aslo adds a bit of a smoothing
     void Update()
     {
         var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); 

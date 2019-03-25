@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sleep : Interaction
+public class Sleep : Interaction 		// The functions that transition to the next day
 {
 	
 	public override void Interact()
@@ -11,28 +11,19 @@ public class Sleep : Interaction
 		FindObjectOfType<ChoiceManager>().StartChoice(this.gameObject, "Sleep?", "Yes Zzz...", "Not Yet");
 	}
 	
+	//When the player cooses to sleep the crafting methods get executed
 	public override void Consequence(string c)
 	{
 		switch (c)
 		{
-			case "A":
-				Debug.Log("Ok sleeping now ZZZZZZZZZZZ");
+			case "A": //sleep
+				Inventory.CraftBoots();
+				Inventory.CraftSneakers();
+				Timeline.NextDay();
 				break;
-			case "B":
+			case "B": // don't sleep
 				Debug.Log("No sleep yet");
 				break;
 		}
 	}
-	
-    // Start is called before the first frame update
-    void Start()
-    {
-		
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-		
-    }
 }
