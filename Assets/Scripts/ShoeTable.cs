@@ -45,12 +45,16 @@ public class ShoeTable : Interaction   		// The table GUI functions
 	// these two methods convert the input to the maximum available if it exceeds the available resource
 	public void RecalculateL()
 	{
+		if(ltext.text == "")
+			return;
 		if(int.Parse(ltext.text) > Inventory.Leather.Ammount)
 			MaxLeather();
 	}
 	
 	public void RecalculateC()
 	{
+		if(ctext.text == "")
+			return;
 		if(int.Parse(ctext.text) > Inventory.Cloth.Ammount)
 			MaxCloth();
 	}
@@ -58,7 +62,7 @@ public class ShoeTable : Interaction   		// The table GUI functions
 	// the following four methods clear or replace the input with the maximum available valie for convenience
 	public void ClearLeather()
 	{
-		ltext.text = "";
+		ltext.text = "0";
 	}
 	
 	public void MaxLeather()
@@ -68,7 +72,7 @@ public class ShoeTable : Interaction   		// The table GUI functions
 	
 	public void ClearCloth()
 	{
-		ctext.text = "";
+		ctext.text = "0";
 	}
 	
 	public void MaxCloth()

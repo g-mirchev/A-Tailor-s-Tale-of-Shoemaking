@@ -17,6 +17,20 @@ public abstract class Item		// an abstravt class for the byable and sellible mat
 		get {return price;}
 	}
 	
+	protected string name;
+	protected string Name
+	{
+		set {name = value;}
+		get {return name;}
+	}
+	
+	protected string describtion;
+	protected string Describtion
+	{
+		set {describtion = value;}
+		get {return describtion;}
+	}
+	
 	public Item(int a, int p)
 	{
 		this.ammount = a;

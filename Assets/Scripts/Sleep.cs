@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Sleep : Interaction 		// The functions that transition to the next day
 {
 	
+	public InputField ltext;
+	public InputField ctext;
+	
 	public override void Interact()
 	{
 		FindObjectOfType<ChoiceManager>().StartChoice(this.gameObject, "Sleep?", "Yes Zzz...", "Not Yet");
@@ -19,6 +22,8 @@ public class Sleep : Interaction 		// The functions that transition to the next 
 			case "A": //sleep
 				Inventory.CraftBoots();
 				Inventory.CraftSneakers();
+				ltext.text = "0";
+				ctext.text = "0";
 				Timeline.NextDay();
 				break;
 			case "B": // don't sleep

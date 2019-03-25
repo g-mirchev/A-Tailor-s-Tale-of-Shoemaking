@@ -80,20 +80,20 @@ public static class Inventory				// Store all the inventory information
 	}
 	
 	// the above processes but modified to convert shoes into gold
-	public static void SellBoots()
+	public static void SellBoots(int a)
 	{
 		if(boots.Ammount == 0)
 			return;
-		gold += boots.Price*boots.Ammount;
-		boots.Ammount = 0;
+		gold += boots.Price*a;
+		boots.Ammount -= a;
 	}
 	
-	public static void SellSneakers()
+	public static void SellSneakers(int a)
 	{
 		if(sneakers.Ammount == 0)
 			return;
-		gold += sneakers.Price*sneakers.Ammount;
-		sneakers.Ammount = 0;
+		gold += sneakers.Price*a;
+		sneakers.Ammount -= a;
 	}
 	
 	// this may or may not have an impact on the story #nospoilers
