@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Shop : Interaction
 {
     
-	public MovementLocker movementLocker;	// reference to the movement locker
 	public Animator animator;				// reference to the animator
+	public Animator doorAnim;
 	
 	// reference to the input fields
 	public InputField ltext;		
@@ -28,26 +28,38 @@ public class Shop : Interaction
 	public Text sPrice;
 	public Text sTotal;
 	public Text sAmount;
+	public Text itemN;
+	public Text itemD;
 	
 	
-	// calling the interact here opens the Table GUI
+	// Open the shop ny interacting with the door
     public override void Interact()
 	{
-		OpenShop();
+		doorAnim.SetBool("IsDoorOpen", true);
+		FindObjectOfType<StoryManager>().TriggerStoryDoor();
 	}
 	
+	// lock movement and bring out the Shop GUI
 	public void OpenShop()
 	{
-		movementLocker.lockMovement();
 		animator.SetBool("IsShopping", true);
+		FindObjectOfType<MovementLocker>().LockMovement();
 	}
 	
+	// unlock movement and dismiss GUI
 	public void CloseShop()
 	{
 		animator.SetBool("IsShopping", false);
-		movementLocker.unlockMovement();
+		doorAnim.SetBool("IsDoorOpen", false);
+		FindObjectOfType<MovementLocker>().UnlockMovement();
+		FindObjectOfType<Shop>().tag = "Untagged";
+		FindObjectOfType<StoryManager>().AddTradeProgress();
+		if(Timeline.Traded)
+			Timeline.InteractedT = false;
 	}
 	
+	// the folowing methods are atatched to butons on the GUI and either clear an input field 
+	// or put the highest possible value based on the current resources
 	public void ClearLeather()
 	{
 		ltext.text = "0";
@@ -88,6 +100,8 @@ public class Shop : Interaction
 		stext.text = Inventory.Sneakers.Ammount.ToString();
 	}
 	
+	
+	// thes next four methods make sure that if the player enters a value too high for to the highest possible
 	public void RecalculateL()
 	{
 		if(ltext.text != "")
@@ -132,6 +146,7 @@ public class Shop : Interaction
 		}
 	}
 	
+	// returns how much of a resource can be purchase wit the current gold
 	private string estimate(int a)
 	{
 		int g = Inventory.Gold;
@@ -143,6 +158,8 @@ public class Shop : Interaction
 		return (g/a).ToString();
 	}
 	
+	// The following two methods buy the ammount of recources  stated in the input fields
+	// in case the player tries to buy too much for his current gold the ammount will be reduced to the highest possible
 	public void BuyL()
 	{
 		if(ltext.text != "")
@@ -166,7 +183,7 @@ public class Shop : Interaction
 		{
 			if(Inventory.Gold > 0)
 			{
-				int a = int.Parse(ltext.text);
+				int a = int.Parse(ctext.text);
 				int e = int.Parse(estimate(Inventory.Cloth.Price));
 				if (a > e)
 					a = e;
@@ -176,6 +193,7 @@ public class Shop : Interaction
 		}
 	}
 	
+	// these two methods are used to sell what is specified in the sellable fields
 	public void SellB()
 	{
 		
@@ -210,6 +228,7 @@ public class Shop : Interaction
 		}
 	}
 	
+	// calculate the total cost of the resource as the player is typing it in the input field
 	public void LTotal()
 	{
 		int t = 0;
@@ -242,7 +261,31 @@ public class Shop : Interaction
 		sTotal.text = t.ToString() + "g";
 	}
 	
+	public void InfoLeather()
+	{
+		itemN.text = Inventory.Leather.Name;
+		itemD.text = Inventory.Leather.Describtion;
+	}
 	
+	public void InfoCloth()
+	{
+		itemN.text = Inventory.Cloth.Name;
+		itemD.text = Inventory.Cloth.Describtion;
+	}
+	
+	public void InfoBoots()
+	{
+		itemN.text = Inventory.Boots.Name;
+		itemD.text = Inventory.Boots.Describtion;
+	}
+	
+	public void InfoSneakers()
+	{
+		itemN.text = Inventory.Sneakers.Name;
+		itemD.text = Inventory.Sneakers.Describtion;
+	}	
+	
+	// update the numbers in the shop so they match the correct prices and how much the player owns of each resource
     void Update()
     {
         lPrice.text = Inventory.Leather.Price.ToString() + "g";

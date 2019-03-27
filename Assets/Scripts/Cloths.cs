@@ -7,6 +7,6 @@ public class Cloths : Item		// I had to name this Cloths because CLoth clashed w
 	public Cloths(int a, int p) : base(a, p) 
 	{
 		Name = "Cloth";
-		Describtion = "Fine, gentle, easy on the eyes... yes your wife truly was an outstanding woman, and a great tailor at that. I am so sorry for your loss Shoemaker.";
+		Describtion = "A woven fabric made of wool. Makes for a comfy, warm and stylish shoe.";
 	}
 }

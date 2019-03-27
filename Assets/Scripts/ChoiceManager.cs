@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ChoiceManager : MonoBehaviour		//a custom choice manager 
 {
-	private bool a = false;
-	private bool b = false;
 	public bool madeChoice = false;
 	
 	public Text textQ;
@@ -14,7 +12,6 @@ public class ChoiceManager : MonoBehaviour		//a custom choice manager
 	public Text textB;
 	
 	public Animator animator;
-	public MovementLocker movementLocker;
 	GameObject caller;
 	
 	// This makes a pop up appear with a question and two answers, also has a reference to the instance calling the choice so a consequence method can be called
@@ -24,14 +21,14 @@ public class ChoiceManager : MonoBehaviour		//a custom choice manager
 		textQ.text = question;
 		textA.text = choiceA;
 		textB.text = choiceB;
-		movementLocker.lockMovement();				// locking the movement again
+		FindObjectOfType<MovementLocker>().LockMovement();				// locking the movement again
 		animator.SetBool("IsChoosing", true);
 	}
 	
 	// This closes the pop up and unlocks the player movement;
 	private void makeChoice()
 	{
-		movementLocker.unlockMovement();
+		FindObjectOfType<MovementLocker>().UnlockMovement();
 		animator.SetBool("IsChoosing", false);
 		madeChoice = true;
 	}
@@ -39,16 +36,12 @@ public class ChoiceManager : MonoBehaviour		//a custom choice manager
 	// These are mapped to the buttons on the Choice pop up, after a choice is made a consequence response is sent to the instance that called the choice
     public void ChoiceA() 
 	{
-		this.a = true;
-		this.b = false;
 		makeChoice();
 		caller.GetComponent<Interaction>().Consequence("A");
 	}
 	
 	public void CboiceB() 
 	{
-		this.b = true;
-		this.a = false;
 		makeChoice();
 		caller.GetComponent<Interaction>().Consequence("B");
 	}

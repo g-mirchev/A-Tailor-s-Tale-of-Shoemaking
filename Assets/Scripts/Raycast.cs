@@ -25,6 +25,7 @@ public class Raycast : MonoBehaviour
 				interactText.text = "Press E to interact";
 				if (Input.GetKeyDown("e"))
 				{
+					interactText.text = "";
 					raycastObj.GetComponent<Interaction>().Interact();
 				}
 			}
@@ -33,16 +34,6 @@ public class Raycast : MonoBehaviour
 			{
 				interactText.text = "";
 			}
-	}
-	
-	public void CrosshairActive()
-	{
-		uiCrosshair.enabled = true;
-	}
-	
-	public void CrosshairInactive()
-	{
-		uiCrosshair.enabled = false;
 	}
 	
 }

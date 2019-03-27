@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShoeTable : Interaction   		// The table GUI functions 
 {
-	public MovementLocker movementLocker;	// reference to the movement locker
 	public Animator animator;				// reference to the animator
 	
 	// reference to the input fields
@@ -17,17 +16,24 @@ public class ShoeTable : Interaction   		// The table GUI functions
 	public Text clothAvailable;
 	public Text bootsMade;
 	public Text sneakersMade;
+	public Text bConsume;
+	public Text SConsume;
 	
 	// calling the interact here opens the Table GUI
     public override void Interact()
 	{
-		OpenWorkingTable();
+		if(!Timeline.InteractedT)
+		{
+			FindObjectOfType<StoryManager>().TriggerStoryTable();
+			Timeline.InteractedT = true;
+		}
+		else {OpenWorkingTable();}
 	}
 	
 	// lock the player movement and display the table
-	void OpenWorkingTable()
+	public void OpenWorkingTable()
 	{
-		movementLocker.lockMovement();
+		FindObjectOfType<MovementLocker>().LockMovement();
 		animator.SetBool("IsUsed", true);
 	}
 	
@@ -39,7 +45,15 @@ public class ShoeTable : Interaction   		// The table GUI functions
 		if(ctext.text != "")
 			Inventory.ClothToUse = int.Parse(ctext.text);
 		animator.SetBool("IsUsed", false);
-		movementLocker.unlockMovement();
+		FindObjectOfType<MovementLocker>().UnlockMovement();
+		int i = FindObjectOfType<StoryManager>().Progress;
+		if(i == 1 || i == 3 || i == 5)
+		{
+			if(!Timeline.Traded)
+			{
+				FindObjectOfType<Shop>().tag = "Interactable";
+			}
+		}
 	}
 	
 	// these two methods convert the input to the maximum available if it exceeds the available resource
@@ -87,6 +101,8 @@ public class ShoeTable : Interaction   		// The table GUI functions
 		clothAvailable.text = "/ " + Inventory.Cloth.Ammount.ToString();
 		bootsMade.text = Inventory.Boots.Ammount.ToString();
 		sneakersMade.text = Inventory.Sneakers.Ammount.ToString();
+		bConsume.text = Inventory.Boots.Consumption.ToString() + " Leather per unit";
+		SConsume.text = Inventory.Sneakers.Consumption.ToString() + " Cloth per unit";
 	}
 	
 }

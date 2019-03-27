@@ -54,10 +54,10 @@ public static class Inventory				// Store all the inventory information
 	static Inventory()
    {
 	   gold = 10;
-	   cloth = new Cloths(0, 1);
-	   leather = new Leather(5, 2);
+	   cloth = new Cloths(0, 5);
+	   leather = new Leather(0, 2);
 	   boots = new Boots(0, 20, 5);
-	   sneakers = new Sneakers(0, 10, 3);
+	   sneakers = new Sneakers(0, 40, 3);
 	   leatherToUse = 0;
 	   clothToUse = 0;
    }
@@ -69,6 +69,7 @@ public static class Inventory				// Store all the inventory information
 			return;
 		gold -= cloth.Price*ammount;
 		cloth.Ammount += ammount;
+		Timeline.Traded = true;
 	}
 	
 	public static void BuyLeather(int ammount)
@@ -77,6 +78,7 @@ public static class Inventory				// Store all the inventory information
 			return;
 		gold -= leather.Price*ammount;
 		leather.Ammount += ammount;
+		Timeline.Traded = true;
 	}
 	
 	// the above processes but modified to convert shoes into gold
@@ -97,11 +99,10 @@ public static class Inventory				// Store all the inventory information
 	}
 	
 	// this may or may not have an impact on the story #nospoilers
-	public static void DonateSneakers(int ammount)
+	public static void DonateSneakers()
 	{
-		if(sneakers.Ammount == 0 || ammount <= 0 || ammount > sneakers.Ammount)
-			return;
-		sneakers.Ammount -= ammount;
+		sneakers.Ammount -= 2;
+		Timeline.Donated = true;
 	}
 	
 	// The following two methods are sacred Elven magic. Please look away now!
@@ -113,6 +114,7 @@ public static class Inventory				// Store all the inventory information
 			leatherToUse -= leatherToUse%boots.Consumption;
 		boots.Ammount += leatherToUse/boots.Consumption;
 		leather.Ammount -= leatherToUse;
+		Timeline.Crafted = true;
 	}
 	
 	public static void CraftSneakers()
@@ -123,6 +125,7 @@ public static class Inventory				// Store all the inventory information
 			clothToUse -= clothToUse%sneakers.Consumption;
 		sneakers.Ammount += clothToUse/sneakers.Consumption;
 		cloth.Ammount -= clothToUse;
+		Timeline.Crafted = true;
 	}
    
 }

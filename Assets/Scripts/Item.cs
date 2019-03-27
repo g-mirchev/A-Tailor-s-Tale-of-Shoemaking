@@ -18,14 +18,14 @@ public abstract class Item		// an abstravt class for the byable and sellible mat
 	}
 	
 	protected string name;
-	protected string Name
+	public string Name
 	{
 		set {name = value;}
 		get {return name;}
 	}
 	
 	protected string describtion;
-	protected string Describtion
+	public string Describtion
 	{
 		set {describtion = value;}
 		get {return describtion;}

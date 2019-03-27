@@ -11,8 +11,12 @@ public class DialogueManager : MonoBehaviour  // I learned how to make this from
 	public Animator animator;
 	
 	private Queue<string> sentences;
+	public GameObject clothPanelShop;
+	public GameObject clothPanelTable;
 	
-	public MovementLocker movementLocker;
+	private int afterClose = 0;
+	private int prog = 1;
+	Dialogue dialogue;
 	
     // Create a que of strings to feed in the dialog box
     void Start()
@@ -21,9 +25,15 @@ public class DialogueManager : MonoBehaviour  // I learned how to make this from
     }
 	
 	// lock player movement and bring up the dialog box entering the name of the NPC speaking and their speech
-	public void StartDialogue(Dialogue dialogue)
+	public void StartDialogue(int i, int p, int a = 0)
 	{
-		movementLocker.lockMovement();
+		prog = p;
+		afterClose = a;
+		Timeline.InDialogue = true;
+		
+		dialogue = new Dialogue(i, p);
+	
+		FindObjectOfType<MovementLocker>().LockMovement();
 		
 		animator.SetBool("IsOpen", true);
 		
@@ -67,8 +77,31 @@ public class DialogueManager : MonoBehaviour  // I learned how to make this from
 	// close the dialog box when done
 	void EndDialouge()
 	{
-		movementLocker.unlockMovement();
 		animator.SetBool("IsOpen", false);
+		Timeline.InDialogue = false;
+		
+		switch (afterClose)
+		{
+			case 0:
+				FindObjectOfType<MovementLocker>().UnlockMovement();
+				break;
+			case 1:
+				FindObjectOfType<Sleep>().WakeUp();
+				break;
+			case 2:
+				if(dialogue.ClothEnabled)
+				{
+					clothPanelShop.SetActive(true);
+					clothPanelTable.SetActive(true);
+				}
+				FindObjectOfType<Shop>().OpenShop();
+				break;
+			case 3:
+				FindObjectOfType<ShoeTable>().OpenWorkingTable();
+				break;
+		}
+		if(dialogue.IsEnd)
+			FindObjectOfType<EndingManager>().EndGame(prog);
 	}
 	
 }
