@@ -52,6 +52,11 @@ public static class Timeline
    
 	static Timeline()
 	{
+		Reset();
+	}
+	
+	public static void Reset()
+	{
 		day = 0;
 		Traded = false;
 		Crafted = false;

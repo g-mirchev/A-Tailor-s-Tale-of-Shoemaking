@@ -39,9 +39,9 @@ public class Dialogue
 			case 0:
 				Name = "";
 				sentences = new string[3];
-				sentences[0] = "Once upon a time in a little village on the outskirts of Winchester there lived an old Shoemaker, alone in his workshop. As he was growing older, however, his ability to craft a good shoe was decreasing drastically.";
-				sentences[1] = "Eventually this led him to a state of Depression. He worked slower and slower, and left the house on fewer and fewer occasions. Most of the villagers had assumed him dead.";
-				sentences[2] = "All but Vismund, the village salesman, who came to see the Shoemaker one morning with some rather bad news... Come the down, there was a knock on the door";
+				sentences[0] = "Once upon a time in a little village on the outskirts of Winchester, there lived an old Shoemaker, alone in his workshop. Every day he would answer the door to the salesman, work on his craft table and sleep in his bed.";
+				sentences[1] = " As he was growing older, however, his ability to craft a good shoe was decreasing drastically. Eventuall this led him to a state of Depression. He worked slower and slower, and left the house on fewer and fewer occasions. Most of the villagers had assumed him dead.";
+				sentences[2] = "All but Vismund, the village salesman, who came to see the Shoemaker one morning with some rather bad news... Come the dawn, there was a knock on the door";
 				break;
 			case 1:
 				Name = "Vismund";

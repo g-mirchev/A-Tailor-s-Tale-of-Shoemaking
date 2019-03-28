@@ -53,6 +53,11 @@ public static class Inventory				// Store all the inventory information
 	// Constructing the inventory giving the initial resources for the game
 	static Inventory()
    {
+		Reset();
+   }
+   
+   public static void Reset()
+   {
 	   gold = 10;
 	   cloth = new Cloths(0, 5);
 	   leather = new Leather(0, 2);
